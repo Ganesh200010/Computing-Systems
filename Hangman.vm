@@ -1,0 +1,427 @@
+function Hangman.new 4
+push constant 2
+call Memory.alloc 1
+pop pointer 0
+push constant 7
+call String.new 1
+push constant 72
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 103
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+pop local 0
+push constant 8
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+pop local 1
+push constant 0
+pop local 2
+push constant 4
+call String.new 1
+push constant 67
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 77
+call String.appendChar 2
+push constant 80
+call String.appendChar 2
+pop this 0
+push this 0
+call String.length 1
+call String.new 1
+pop this 1
+label WHILE_EXP0
+push local 2
+push this 0
+call String.length 1
+lt
+not
+if-goto WHILE_END0
+push this 1
+push constant 219
+call String.appendChar 2
+pop this 1
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push local 0
+call Output.printString 1
+pop temp 0
+call Output.println 0
+pop temp 0
+call Output.println 0
+pop temp 0
+push local 1
+call Output.printString 1
+pop temp 0
+call Output.println 0
+pop temp 0
+push pointer 0
+return
+function Hangman.run 4
+push argument 0
+pop pointer 0
+push constant 0
+pop local 2
+push constant 3
+pop local 1
+push constant 0
+pop local 0
+push pointer 0
+call Hangman.drawHangPost 1
+pop temp 0
+label WHILE_EXP0
+push local 0
+not
+not
+if-goto WHILE_END0
+push this 1
+call Output.printString 1
+pop temp 0
+push local 1
+push constant 15
+call Output.moveCursor 2
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+call Keyboard.readChar 0
+pop local 3
+call Output.println 0
+pop temp 0
+push pointer 0
+push local 3
+call Hangman.isCorrectGuess 2
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 2
+push constant 0
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+call Hangman.drawHead 1
+pop temp 0
+label IF_FALSE1
+push local 2
+push constant 1
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+call Hangman.drawTorso 1
+pop temp 0
+label IF_FALSE2
+push local 2
+push constant 2
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push pointer 0
+call Hangman.drawRightArm 1
+pop temp 0
+label IF_FALSE3
+push local 2
+push constant 3
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push pointer 0
+call Hangman.drawLeftArm 1
+pop temp 0
+label IF_FALSE4
+push local 2
+push constant 4
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push pointer 0
+call Hangman.drawRightLeg 1
+pop temp 0
+label IF_FALSE5
+push local 2
+push constant 5
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push pointer 0
+call Hangman.drawLeftLeg 1
+pop temp 0
+push constant 10
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 77
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 86
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 1
+neg
+pop local 0
+label IF_FALSE6
+push local 2
+push constant 1
+add
+pop local 2
+label IF_FALSE0
+push pointer 0
+call Hangman.isWin 1
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 8
+call String.new 1
+push constant 89
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 119
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 1
+neg
+pop local 0
+label IF_FALSE7
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Hangman.isWin 1
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push this 1
+call String.length 1
+lt
+not
+if-goto WHILE_END0
+push this 1
+push local 0
+call String.charAt 2
+push constant 219
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 1
+neg
+return
+function Hangman.isCorrectGuess 1
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push this 0
+call String.length 1
+lt
+not
+if-goto WHILE_END0
+push argument 1
+push this 0
+push local 0
+call String.charAt 2
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 1
+push local 0
+push argument 1
+call String.setCharAt 3
+pop temp 0
+push constant 1
+neg
+return
+label IF_FALSE0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Hangman.drawHangPost 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 350
+push constant 200
+push constant 450
+push constant 220
+call Screen.drawRectangle 4
+pop temp 0
+push constant 395
+push constant 50
+push constant 405
+push constant 200
+call Screen.drawRectangle 4
+pop temp 0
+push constant 300
+push constant 40
+push constant 405
+push constant 50
+call Screen.drawRectangle 4
+pop temp 0
+push constant 300
+push constant 40
+push constant 310
+push constant 70
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Hangman.drawHead 0
+push argument 0
+pop pointer 0
+push constant 305
+push constant 90
+push constant 20
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Hangman.drawTorso 0
+push argument 0
+pop pointer 0
+push constant 305
+push constant 110
+push constant 305
+push constant 160
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function Hangman.drawRightArm 0
+push argument 0
+pop pointer 0
+push constant 305
+push constant 135
+push constant 320
+push constant 120
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function Hangman.drawLeftArm 0
+push argument 0
+pop pointer 0
+push constant 305
+push constant 135
+push constant 290
+push constant 120
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function Hangman.drawRightLeg 0
+push argument 0
+pop pointer 0
+push constant 305
+push constant 160
+push constant 325
+push constant 180
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function Hangman.drawLeftLeg 0
+push argument 0
+pop pointer 0
+push constant 305
+push constant 160
+push constant 285
+push constant 180
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function Hangman.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return

@@ -1,0 +1,12 @@
+class Main
+{
+   function void main()
+   {
+      var Hangman game;
+
+      let game = Hangman.new();
+      do game.run();
+      do game.dispose();
+      return;
+   }
+}

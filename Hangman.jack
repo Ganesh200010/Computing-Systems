@@ -1,0 +1,169 @@
+class Hangman
+{
+   field String solution;
+   field String correctGuesses;
+   constructor Hangman new()
+   {
+      var String hangman,guesses;
+      var int i;
+      var int answerLength;
+      let hangman = "Hangman";
+      let guesses = "Guesses:";
+      let i = 0;
+      
+      let solution = "COMP";
+      let correctGuesses = String.new(solution.length());
+      while(i < (solution.length()))
+      {
+         let correctGuesses = correctGuesses.appendChar(219);
+         let i = i+1; 
+      }
+      do Output.printString(hangman);
+      do Output.println();
+      do Output.println();
+      do Output.printString(guesses);
+      do Output.println();
+      return this;
+   }
+   
+   //start and run the game.
+   method void run()
+   {
+      var boolean endGame;
+      var int line, wrongGuesses;
+      var char guess;
+       
+      let wrongGuesses = 0;
+      let line = 3; 
+      let endGame = 0;
+      do drawHangPost();
+      
+      while(~(endGame))
+      {
+         do Output.printString(correctGuesses);
+         do Output.moveCursor(line,15);
+         let line = line +1;
+         let guess = Keyboard.readChar();
+         do Output.println();
+         if(~(isCorrectGuess(guess)))
+         {
+            if(wrongGuesses = 0)
+            {
+               do drawHead();
+            }
+            if(wrongGuesses = 1)
+            {
+               do drawTorso();
+            }
+            if(wrongGuesses = 2)
+            {
+               do drawRightArm();
+            }
+            if(wrongGuesses = 3)
+            {
+               do drawLeftArm();
+            }
+            if(wrongGuesses = 4)
+            {
+               do drawRightLeg();
+            }
+            if(wrongGuesses = 5)
+            {
+               do drawLeftLeg();
+               do Output.printString("GAME OVER!");
+               let endGame = -1;
+            }
+            let wrongGuesses = wrongGuesses +1; 
+         }
+         if(isWin())
+         {
+            do Output.printString("You win!");
+            let endGame = -1;
+         }
+      }
+      return;
+   }
+   
+   //Check winning condition
+   method boolean isWin()
+   {
+      var int i;
+      let i = 0;
+      while(i < correctGuesses.length())
+      {
+         if(correctGuesses.charAt(i) = 219)
+         {
+            return 0; 
+         }
+         let i = i+1;
+      }
+      return -1; 
+   }
+   
+   //Verify whole word as the game progresses
+   method boolean isCorrectGuess(char guess)
+   { 
+      var int i;
+      let i =0;
+      while(i < solution.length())
+      {
+         if(guess = solution.charAt(i))
+         {
+            do correctGuesses.setCharAt(i, guess);
+            return -1;
+         }
+         let i=i+1;
+      }
+      return 0;
+   }
+   
+   //Default game setup for Hangman
+   method void drawHangPost()
+   { 
+      do Screen.setColor(true);
+      do Screen.drawRectangle(350, 200, 450, 220);
+      do Screen.drawRectangle(395,50,405,200);
+      do Screen.drawRectangle(300,40,405,50);
+      do Screen.drawRectangle(300,40,310,70);
+      return;
+   }
+   
+   //Main drawing functions
+   method void drawHead()
+   {
+      do Screen.drawCircle(305,90,20);
+      return;
+   }
+   method void drawTorso()
+   {
+      do Screen.drawLine(305,110, 305, 160);
+      return;
+   }
+   method void drawRightArm()
+   {
+      do Screen.drawLine(305,135, 320, 120);
+      return;
+   }
+
+   method void drawLeftArm()
+   {
+      do Screen.drawLine(305,135, 290, 120);
+      return;
+   }
+   method void drawRightLeg()
+   {
+      do Screen.drawLine(305,160, 325, 180);
+      return;
+   }
+   method void drawLeftLeg()
+   {
+      do Screen.drawLine(305,160, 285, 180);
+      return;
+   }
+   //Deallocate Object in Memory.
+   method void dispose()
+   {
+     do Memory.deAlloc(this);
+     return;
+   }
+}
