@@ -1,0 +1,15 @@
+//The HACK computer, includes CPU, ROM and RAM.
+ // When reset is 0, then the program stored in the computer's ROM will be executed.
+ // When reset is 1, then the execution of the program restarts. 
+ //based on codes from the program,we can see some output on the screen
+ //And with help of keyboard we can interact with screen 
+
+CHIP Computer {
+
+    IN reset;
+
+    PARTS:
+    CPU1(inM=memoryOut, instruction=ROMOut, reset=reset, outM=outM, writeM=writeM, addressM=addressM, pc=pc);
+    ROM32K(address=pc, out=ROMOut);
+    Memory(in=outM, load=writeM, address=addressM, out=memoryOut);
+}
